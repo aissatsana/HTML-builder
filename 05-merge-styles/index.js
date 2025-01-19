@@ -4,7 +4,7 @@ const styleFolder = path.join(__dirname, 'styles');
 const bundleFolder = path.join(__dirname, 'project-dist');
 const styles = [];
 
-async function bundleCss() {
+async function bundleCss(styleFolder, bundleFolder) {
   try {
     const cssFiles = await fs.promises.readdir(styleFolder);
     for (const file of cssFiles) {
@@ -31,4 +31,8 @@ async function bundleCss() {
     console.error(e);
   }
 }
-bundleCss();
+bundleCss(styleFolder, bundleFolder);
+
+module.exports = {
+  bundleCss,
+};
