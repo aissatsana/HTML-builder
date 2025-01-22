@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const styleFolder = path.join(__dirname, 'styles');
 const bundleFolder = path.join(__dirname, 'project-dist');
-const styles = [];
 
-async function bundleCss(styleFolder, bundleFolder) {
+async function bundleCss(styleFolder, bundleFolder, name) {
   try {
+    const styles = [];
     const cssFiles = await fs.promises.readdir(styleFolder);
     for (const file of cssFiles) {
       const filePath = path.join(styleFolder, file);
@@ -15,7 +15,7 @@ async function bundleCss(styleFolder, bundleFolder) {
         styles.push(data);
       }
     }
-    const bundleFile = path.join(bundleFolder, 'bundle.css');
+    const bundleFile = path.join(bundleFolder, name + '.css');
 
     try {
       await fs.promises.stat(bundleFile);
@@ -31,7 +31,7 @@ async function bundleCss(styleFolder, bundleFolder) {
     console.error(e);
   }
 }
-bundleCss(styleFolder, bundleFolder);
+bundleCss(styleFolder, bundleFolder, 'bundle');
 
 module.exports = {
   bundleCss,

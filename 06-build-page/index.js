@@ -49,7 +49,7 @@ async function generateHTML() {
 async function buildPage() {
   await generateHTML();
   await copyDir(assetsFolder, distFolder);
-  await bundleCss(styleFolder, distFolder);
+  await bundleCss(styleFolder, distFolder, 'style');
 }
 
 buildPage();
