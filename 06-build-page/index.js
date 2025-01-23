@@ -8,20 +8,6 @@ const distFolder = path.join(__dirname, 'dist');
 const templateFile = path.join(__dirname, 'template.html');
 const componentsFolder = path.join(__dirname, 'components');
 
-async function clearDir(dir) {
-  const files = await fs.promises.readdir(dir);
-  for (const file of files) {
-    const filePath = path.join(dir, file);
-    const stat = await fs.promises.stat(filePath);
-
-    if (stat.isFile()) {
-      await fs.promises.unlink(filePath);
-    } else if (stat.isDirectory()) {
-      await clearDir(filePath);
-    }
-  }
-}
-
 async function generateHTML() {
   let templateData = await fs.promises.readFile(templateFile, 'utf8');
 
