@@ -13,6 +13,7 @@ async function clearDir(dir) {
       await fs.unlink(filePath);
     } else if (stat.isDirectory()) {
       await clearDir(filePath);
+      await fs.rmdir(filePath);
     }
   }
 }
